@@ -14,21 +14,21 @@ import ta
 # dat.analyst_price_targets
 
 # Hisse verisini al (örnek: ASELS.IS)
-ticker = "THYAO.IS"
-df = yf.Ticker(ticker).history(period="6mo", interval="1d")
+#ticker = "THYAO.IS"
+#df = yf.Ticker(ticker).history(period="6mo", interval="1d")
 
 # Teknik göstergeleri hesapla
-df['rsi'] = ta.momentum.RSIIndicator(close=df['Close'], window=14).rsi()
-macd = ta.trend.MACD(close=df['Close'])
-df['macd'] = macd.macd()
-df['macd_signal'] = macd.macd_signal()
-bb = ta.volatility.BollingerBands(close=df['Close'], window=20, window_dev=2)
-df['bb_bbm'] = bb.bollinger_mavg()
-df['bb_bbh'] = bb.bollinger_hband()
-df['bb_bbl'] = bb.bollinger_lband()
-df["SMA_5"] = df["Close"].rolling(window=5).mean()
-df["SMA_10"] = df["Close"].rolling(window=10).mean()
-df["EMA_5"] = df["Close"].ewm(span=5).mean()
+#df['rsi'] = ta.momentum.RSIIndicator(close=df['Close'], window=14).rsi()
+#macd = ta.trend.MACD(close=df['Close'])
+#df['macd'] = macd.macd()
+#df['macd_signal'] = macd.macd_signal()
+#bb = ta.volatility.BollingerBands(close=df['Close'], window=20, window_dev=2)
+#df['bb_bbm'] = bb.bollinger_mavg()
+#df['bb_bbh'] = bb.bollinger_hband()
+#df['bb_bbl'] = bb.bollinger_lband()
+#df["SMA_5"] = df["Close"].rolling(window=5).mean()
+#df["SMA_10"] = df["Close"].rolling(window=10).mean()
+#df["EMA_5"] = df["Close"].ewm(span=5).mean()
 
 # df['Date'] = df['Date'].astype(str)  # Eğer datetime formatındaysa, önce string'e çevir
 # df['Date'] = df['Date'].apply(lambda x: x.split(' ')[0])  # ' ' karakterine göre ayır ve ilk kısmı al
