@@ -40,11 +40,11 @@ import ta
 # Özellikler ve hedef sütunu
 #features = df[['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
 #target = df['Close']
-last_week = df.iloc[-8:-1][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
-last_data = df.iloc[-1][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
-second_data = df.iloc[-2][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
-son10_rsi = df[['rsi']].iloc[-10:].copy()
-son10_rsi.index = son10_rsi.index.strftime('%Y-%m-%d')
+#last_week = df.iloc[-8:-1][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
+#last_data = df.iloc[-1][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
+#second_data = df.iloc[-2][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm', 'bb_bbh', 'bb_bbl', 'SMA_5', 'SMA_10', 'EMA_5']]
+#son10_rsi = df[['rsi']].iloc[-10:].copy()
+#son10_rsi.index = son10_rsi.index.strftime('%Y-%m-%d')
 #print(son10_rsi)
 # rsi 30 altı aşırı satım 70 üstü aşırı alım eğer 30 üstü çıkarsa alım zamanı 70 in altını kırarsa satım zamanı
 def rsi_signal(df):
