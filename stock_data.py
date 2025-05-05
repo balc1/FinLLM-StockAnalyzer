@@ -83,8 +83,8 @@ def bol_signal(l_price, bbm):
 
 def stock_info(stock):
     data = yf.Ticker(stock+".IS")
-    time.sleep(2)
-    df = yf.Ticker(stock+".IS").history(period="6mo", interval="1d")
+    time.sleep(1)
+    df = data.history(period="6mo", interval="1d")
     keys = ["regularMarketPrice", "marketCap", "enterpriseValue", "52WeekChange", "totalCash", "totalCashPerShare", "cashFlow", "freeCashflow","earningsGrowth","fiftyTwoWeekLowChangePercent", "fiftyTwoWeekHighChangePercent", "fiftyTwoWeekLow", "fiftyTwoWeekHigh", "fiftyDayAverage", "twoHundredDayAverage", "averageDailyVolume3Month", "fiftyDayAverageChange", "twoHundredDayAverageChange"]
     values = {k: data.info.get(k) for k in keys}
 
