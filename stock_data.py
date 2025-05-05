@@ -121,6 +121,6 @@ def stock_info(stock):
     
     except Exception as e:
         st.error(f"YFinance verisi alınırken hata oluştu: {e}")
-        return None, None, None, None, None, None
+        return None, None, None, None
 
 #print(stock_info("THYAO"))
