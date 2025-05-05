@@ -81,32 +81,45 @@ def bol_signal(l_price, bbm):
         return False
 
 
+@st.cache_data(ttl=3600)  # 1 saat boyunca aynı hisseyi yeniden çekmez
 def stock_info(stock):
-    data = yf.Ticker(stock+".IS")
-    time.sleep(1)
-    df = data.history(period="6mo", interval="1d")
-    keys = ["regularMarketPrice", "marketCap", "enterpriseValue", "52WeekChange", "totalCash", "totalCashPerShare", "cashFlow", "freeCashflow","earningsGrowth","fiftyTwoWeekLowChangePercent", "fiftyTwoWeekHighChangePercent", "fiftyTwoWeekLow", "fiftyTwoWeekHigh", "fiftyDayAverage", "twoHundredDayAverage", "averageDailyVolume3Month", "fiftyDayAverageChange", "twoHundredDayAverageChange"]
-    values = {k: data.info.get(k) for k in keys}
+    try:
+        ticker = yf.Ticker(stock + ".IS")
+        time.sleep(1)  # Limit hatası yememek için kısa bekleme
 
-    marketcap = values['marketCap']
+        df = ticker.history(period="6mo", interval="1d")
+        data_info = ticker.info
 
-    df['rsi'] = ta.momentum.RSIIndicator(close=df['Close'], window=14).rsi()
-    macd = ta.trend.MACD(close=df['Close'])
-    df['macd'] = macd.macd()
-    df['macd_signal'] = macd.macd_signal()
-    bb = ta.volatility.BollingerBands(close=df['Close'], window=20, window_dev=2)
-    df['bb_bbm'] = bb.bollinger_mavg()
+        keys = [
+            "regularMarketPrice", "marketCap", "enterpriseValue", "52WeekChange", "totalCash",
+            "totalCashPerShare", "cashFlow", "freeCashflow", "earningsGrowth",
+            "fiftyTwoWeekLowChangePercent", "fiftyTwoWeekHighChangePercent", "fiftyTwoWeekLow",
+            "fiftyTwoWeekHigh", "fiftyDayAverage", "twoHundredDayAverage",
+            "averageDailyVolume3Month", "fiftyDayAverageChange", "twoHundredDayAverageChange"
+        ]
+        values = {k: data_info.get(k) for k in keys}
 
-    last_data = df.iloc[-1][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm']]
-    second_data = df.iloc[-2][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm']]
+        df['rsi'] = ta.momentum.RSIIndicator(close=df['Close'], window=14).rsi()
+        macd = ta.trend.MACD(close=df['Close'])
+        df['macd'] = macd.macd()
+        df['macd_signal'] = macd.macd_signal()
+        bb = ta.volatility.BollingerBands(close=df['Close'], window=20, window_dev=2)
+        df['bb_bbm'] = bb.bollinger_mavg()
 
-    rsi_sig = rsi_signal(df=df)
-    macd_sig = macd_signal(last_data['macd'], last_data['macd_signal'])
-    bol_sig = bol_signal(values['regularMarketPrice'], last_data['bb_bbm'])
+        last_data = df.iloc[-1][['Open', 'High', 'Low', 'Volume', 'rsi', 'macd', 'macd_signal', 'bb_bbm']]
 
-    balance = data.quarterly_balance_sheet
-    income = data.quarterly_income_stmt    
+        # RSI yorum fonksiyonu
+        rsi_sig = rsi_signal(df)
+        macd_sig = macd_signal(last_data['macd'], last_data['macd_signal'])
+        bol_sig = bol_signal(values['regularMarketPrice'], last_data['bb_bbm'])
 
-    return values, rsi_sig, macd_sig, bol_sig
+        balance = ticker.quarterly_balance_sheet
+        income = ticker.quarterly_income_stmt    
+
+        return values, rsi_sig, macd_sig, bol_sig
+    
+    except Exception as e:
+        st.error(f"YFinance verisi alınırken hata oluştu: {e}")
+        return None, None, None, None, None, None
 
 #print(stock_info("THYAO"))
