@@ -18,15 +18,15 @@ A clean, browser-based interface for easy interaction.
 
 ```bash
 streamlit run main.py
+```
 2. 🧾 Tkinter Desktop Interface
 A minimal desktop GUI for local use.
 
 To run:
 
-bash
-Kopyala
-Düzenle
+```
 python tk_interface.py
+```
 📁 File Upload
 You can:
 
@@ -64,10 +64,9 @@ A detailed output is presented to the user.
 The Streamlit interface includes a login system. Unauthorized users cannot access the main interface.
 
 🛠️ Requirements
-bash
-Kopyala
-Düzenle
+```
 pip install -r requirements.txt
+```
 Main dependencies:
 
 streamlit
@@ -86,7 +85,7 @@ openai or groq (for LLM interaction)
 The Streamlit version can be deployed on Streamlit Community Cloud, Render, or similar platforms.
 
 📬 Contact
-Developer: [Your Name]
-Email: [yourname@example.com]
+Developer: [Emre BALCI]
+Email: [emrblc02@gmail.com]
 
 This application is for educational and analysis purposes only. It does not constitute investment advice.
