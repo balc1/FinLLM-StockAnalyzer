@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import ta
 import time
+import streamlit as st
 
 # deneme = yf.Ticker("THYAO.IS")
 # keys = ["regularMarketPrice", "marketCap", "enterpriseValue", "52WeekChange", "earningsQuarterlyGrowth", "totalCash", "totalCashPerShare", "freeCashflow","earningsGrowth","fiftyTwoWeekLowChangePercent", "fiftyTwoWeekHighChangePercent", "fiftyTwoWeekLow", "fiftyTwoWeekHigh", "fiftyDayAverage", "twoHundredDayAverage", "averageDailyVolume3Month", "fiftyDayAverageChange", "twoHundredDayAverageChange"]
