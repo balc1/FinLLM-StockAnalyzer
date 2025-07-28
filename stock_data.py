@@ -123,4 +123,4 @@ def stock_info(stock):
         st.error(f"YFinance verisi alınırken hata oluştu: {e}")
         return None, None, None, None
 
-#print(stock_info("THYAO"))
+print(stock_info("THYAO"))
